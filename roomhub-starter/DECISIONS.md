@@ -7,7 +7,7 @@ An unanswered question gives 0 points.
 ## 1. A rule you moved
 Pick one business rule (R1–R8). In which file did it live in the starter and in which file does it live now? Why there?
 
-_(your answer here)_
+In starter, regula de suprapunere era verificata in BookingService.cs, dar intervalele care doar se atingeau erau tratate gresit ca suprapunere. Acum verificarea intervalului este in BookingPeriod.cs, iar rezervarile active sunt verificate in Booking.cs. Am pus regula in domeniu pentru ca metoda de creare sa valideze inainte sa creeze rezervarea. API-ul va folosi regula noua dupa migrarea slice-ului.
 
 ## 2. Result instead of an exception
 Why is `Result` a better choice than an exception for "the room is occupied"? What happens in your code when an `Error` is returned?
