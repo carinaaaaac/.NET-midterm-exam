@@ -22,14 +22,18 @@ public sealed class BookingRepository(RoomHubDbContext dbContext) : IBookingRepo
         CancellationToken cancellationToken)
     {
         var dayStartUtc = utcDay.Date;
-        var nextDayStartUtc = dayStartUtc.AddDays(1);
+        var nextDayStartUtc = dayStartUtc == DateTime.MaxValue.Date
+            ? DateTime.MaxValue
+            : dayStartUtc.AddDays(1);
 
         return await dbContext.Bookings
             .Where(booking =>
                 booking.Status == BookingStatus.Active &&
                 booking.BookedBy == bookedBy &&
                 booking.Period.StartUtc >= dayStartUtc &&
-                booking.Period.StartUtc < nextDayStartUtc)
+                (dayStartUtc == DateTime.MaxValue.Date
+                    ? booking.Period.StartUtc.Date == dayStartUtc
+                    : booking.Period.StartUtc < nextDayStartUtc))
             .ToListAsync(cancellationToken);
     }
 

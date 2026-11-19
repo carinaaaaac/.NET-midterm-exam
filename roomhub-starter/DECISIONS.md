@@ -22,14 +22,14 @@ Implementarea EF Core este in Infrastructure/Persistence: repository-urile folos
 ## 4. The flow of a request
 Draw in text (ASCII arrows) the path of a `POST /api/rooms/{roomId}/bookings` request through your project, with the **real** names of files and classes, from the endpoint to the database.
 
-_(your answer here)_
+POST /api/rooms/{roomId}/bookings → CreateBookingEndpoint.Handle → CreateBookingCommand → CreateBookingHandler → IRoomRepository.GetByIdAsync (404?) → IBookingRepository.ListActiveForRoomAsync → Booking.Create (R2–R7) → bookings.Add → IUnitOfWork.SaveChangesAsync (RoomHubDbContext) → SQLite → Created 201.
 
 ## 5. What you rejected from what the AI gave you
 Give a concrete example of code or an idea proposed by the AI that you corrected or rejected, and say why.
 
-_(your answer here)_
+Nu am respins nimic facut de ai
 
 ## 6. If you had 30 more minutes
 What would you improve and what risk did you leave in the project?
 
-_(your answer here)_
+Inca 30 de minute: lipsesc teste automate, lipsește paginarea/listarea
