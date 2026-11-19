@@ -12,12 +12,12 @@ In starter, regula de suprapunere era verificata in BookingService.cs, dar inter
 ## 2. Result instead of an exception
 Why is `Result` a better choice than an exception for "the room is occupied"? What happens in your code when an `Error` is returned?
 
-_(your answer here)_
+Result e mai bun pentru ca e o buna practica sa nu aruncam multe exceptii, ci sa transformam exceptia intr o valoare pe care sa o returnam, asa cum facem prin Result
 
 ## 3. Who knows about EF Core?
 Which classes in your project know about EF Core and which do not? What do you gain and what do you pay with Repository + Unit of Work?
 
-_(your answer here)_
+Implementarea EF Core este in Infrastructure/Persistence: repository-urile folosesc RoomHubDbContext si fac legatura cu baza de date. In Domain sunt definite interfetele IRoomRepository, IBookingRepository si IUnitOfWork, iar DbContext implementeaza Unit of Work. Cand handler-ele vor folosi aceste interfete, endpointurile vor putea ramane subtiri. Momentan, rutele vechi nu sunt conectate la repository-urile noi.
 
 ## 4. The flow of a request
 Draw in text (ASCII arrows) the path of a `POST /api/rooms/{roomId}/bookings` request through your project, with the **real** names of files and classes, from the endpoint to the database.
